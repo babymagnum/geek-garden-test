@@ -38,7 +38,7 @@ class ListProductItem extends StatelessWidget {
                     color: Colors.black.withOpacity(0.4),
                     borderRadius: const BorderRadius.only(bottomRight: Radius.circular(6), topLeft: Radius.circular(6))
                   ),
-                  child: Text('\$ ${product.price}', style: TextStyle(fontSize: Get.width * 0.03, color: Colors.white, fontWeight: FontWeight.w800),),
+                  child: Text('\$ ${'${product.price}'.substring(0, '${product.price}'.length > 6 ? 5 : '${product.price}'.length)}', style: TextStyle(fontSize: Get.width * 0.03, color: Colors.white, fontWeight: FontWeight.w800),),
                 ),
               )
             ],
@@ -56,22 +56,28 @@ class ListProductItem extends StatelessWidget {
                     SizedBox(height: Get.width * 0.02,),
                     Row(
                       children: [
-                        Container(
-                          width: Get.width * 0.06, height: Get.width * 0.06,
-                          decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.4),
-                              borderRadius: BorderRadius.circular(6)
+                        InkWell(
+                          child: Container(
+                            width: Get.width * 0.06, height: Get.width * 0.06,
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.4),
+                                borderRadius: BorderRadius.circular(6)
+                            ),
+                            child: Icon(Icons.delete_forever, color: Colors.white, size: Get.width * 0.04,),
                           ),
-                          child: Icon(Icons.delete_forever, color: Colors.white, size: Get.width * 0.04,),
+                          onTap: () => onDelete(),
                         ),
                         SizedBox(width: Get.width * 0.02,),
-                        Container(
-                          width: Get.width * 0.06, height: Get.width * 0.06,
-                          decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.4),
-                              borderRadius: BorderRadius.circular(6)
+                        InkWell(
+                          onTap: () => onEdit(),
+                          child: Container(
+                            width: Get.width * 0.06, height: Get.width * 0.06,
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.4),
+                                borderRadius: BorderRadius.circular(6)
+                            ),
+                            child: Icon(Icons.edit_outlined, color: Colors.white, size: Get.width * 0.04,),
                           ),
-                          child: Icon(Icons.edit_outlined, color: Colors.white, size: Get.width * 0.04,),
                         ),
                         const Spacer(),
                         RichText(
@@ -79,7 +85,7 @@ class ListProductItem extends StatelessWidget {
                               children: [
                                 WidgetSpan(child: Icon(Icons.star, size: Get.width * 0.035,).marginOnly(right: Get.width * 0.01, bottom: 1)),
                                 TextSpan(
-                                    text: '${product.rating?.rate}',
+                                    text: '${product.rating?.rate}'.substring(0, '${product.rating?.rate}'.length > 3 ? 3 : '${product.rating?.rate}'.length),
                                     style: TextStyle(fontSize: Get.width * 0.035, color: Colors.black, fontWeight: FontWeight.w600)
                                 )
                               ]

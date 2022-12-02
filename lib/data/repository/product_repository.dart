@@ -17,12 +17,8 @@ class ProductRepositoryImpl extends ProductRepository {
 
     if (response.isOk) {
       final data = response.body as List<dynamic>;
-      final products = <ProductModel>[];
-      for (Map<String, dynamic> json in data) {
-        products.add(ProductModel.fromJson(json));
-      }
 
-      return Right(products);
+      return Right(data.map((e) => ProductModel.fromJson(e)).toList());
     } else {
       return const Left('Tidak ada data');
     }

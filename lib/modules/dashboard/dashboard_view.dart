@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geek_garden_test/data/values/enums.dart';
 import 'package:geek_garden_test/modules/dashboard/dashboard_controller.dart';
+import 'package:geek_garden_test/modules/dashboard/widgets/create_edit_product/create_edit_product_dialog.dart';
 import 'package:geek_garden_test/modules/dashboard/widgets/list_product_item.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +31,13 @@ class DashboardView extends GetView<DashboardController> {
       ListView.separated(
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04, vertical: Get.height * 0.02),
-        itemBuilder: (_, index) => ListProductItem(product: controller.products[index], onEdit: () {}, onDelete: () {},),
+        itemBuilder: (_, index) {
+          return ListProductItem(
+            product: controller.products[index],
+            onEdit: () => Get.dialog(CreateEditProductDialog(product: controller.products[index],)),
+            onDelete: () => controller.products.removeAt(index),
+          );
+        },
         separatorBuilder: (_, __) => Divider(color: Colors.transparent, height: Get.width * 0.02,),
         itemCount: controller.products.length,
       );
@@ -41,6 +48,7 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Geek Garden Test', style: TextStyle(fontSize: Get.width * 0.055, fontWeight: FontWeight.bold),),
       ),
       body: Column(
@@ -52,7 +60,7 @@ class DashboardView extends GetView<DashboardController> {
                 child: Text('Product', style: TextStyle(fontSize: Get.width * 0.05, fontWeight: FontWeight.bold),),
               ),
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () => Get.dialog(CreateEditProductDialog()),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03, vertical: Get.width * 0.03),
                   shape: RoundedRectangleBorder(
