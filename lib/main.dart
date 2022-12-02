@@ -6,7 +6,7 @@ import 'package:geek_garden_test/routes/routes.dart';
 import 'package:get/get.dart';
 
 void _initCoreService() {
-  Get.put(() => BaseService(), permanent: true);
+  Get.put(BaseService(), permanent: true);
 }
 
 void main() {

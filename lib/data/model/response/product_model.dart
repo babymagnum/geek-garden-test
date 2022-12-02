@@ -19,7 +19,7 @@ class ProductModel {
   }
   int? id;
   String? title;
-  double? price;
+  dynamic price;
   String? description;
   String? category;
   String? image;
@@ -50,7 +50,7 @@ class Rating {
     rate = json['rate'];
     count = json['count'];
   }
-  double? rate;
+  dynamic rate;
   int? count;
 
   Map<String, dynamic> toJson() {
