@@ -22,12 +22,12 @@ class DashboardView extends GetView<DashboardController> {
         children: [
           GestureDetector(
             onTap: () => controller.getProduct(),
-            child: Icon(Icons.refresh, size: Get.width * 0.04, color: Colors.black45,),
+            child: Icon(Icons.refresh, size: Get.width * 0.06, color: Colors.black45,),
           ),
         ],
       ) :
       controller.products.isEmpty ?
-      Text('Product kosong', style: TextStyle(fontSize: Get.width * 0.04),) :
+      Center(child: Text('Product kosong', style: TextStyle(fontSize: Get.width * 0.04),)) :
       ListView.separated(
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04, vertical: Get.height * 0.02),
