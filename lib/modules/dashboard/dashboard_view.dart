@@ -30,7 +30,7 @@ class DashboardView extends GetView<DashboardController> {
       Center(child: Text('Product kosong', style: TextStyle(fontSize: Get.width * 0.04),)) :
       ListView.separated(
         shrinkWrap: true,
-        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04, vertical: Get.height * 0.02),
+        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03, vertical: Get.width * 0.03),
         itemBuilder: (_, index) {
           return ListProductItem(
             product: controller.products[index],
@@ -38,7 +38,7 @@ class DashboardView extends GetView<DashboardController> {
             onDelete: () => controller.products.removeAt(index),
           );
         },
-        separatorBuilder: (_, __) => Divider(color: Colors.transparent, height: Get.width * 0.02,),
+        separatorBuilder: (_, __) => Divider(color: Colors.transparent, height: Get.width * 0.03,),
         itemCount: controller.products.length,
       );
     });
@@ -53,11 +53,11 @@ class DashboardView extends GetView<DashboardController> {
       ),
       body: Column(
         children: [
-          SizedBox(height: Get.width * 0.04,),
+          SizedBox(height: Get.width * 0.03,),
           Row(
             children: [
               Expanded(
-                child: Text('Product', style: TextStyle(fontSize: Get.width * 0.05, fontWeight: FontWeight.bold),),
+                child: Text('Products', style: TextStyle(fontSize: Get.width * 0.05, fontWeight: FontWeight.bold),),
               ),
               TextButton.icon(
                 onPressed: () => Get.dialog(CreateEditProductDialog()),
@@ -75,8 +75,8 @@ class DashboardView extends GetView<DashboardController> {
                 label: Text('Add Product', style: TextStyle(fontSize: Get.width * 0.04, color: Colors.white, fontWeight: FontWeight.w500),),
               )
             ],
-          ).marginSymmetric(horizontal: Get.width * 0.04),
-          SizedBox(height: Get.width * 0.04,),
+          ).marginSymmetric(horizontal: Get.width * 0.03),
+          SizedBox(height: Get.width * 0.03,),
           const Divider(height: 1, color: Color(0xffBBBBBB),),
           Expanded(child: _product(context))
         ],
