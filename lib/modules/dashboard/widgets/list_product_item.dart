@@ -38,7 +38,7 @@ class ListProductItem extends StatelessWidget {
                     color: Colors.black.withOpacity(0.4),
                     borderRadius: const BorderRadius.only(bottomRight: Radius.circular(6), topLeft: Radius.circular(6))
                   ),
-                  child: Text('\$ ${'${product.price}'.substring(0, '${product.price}'.length > 6 ? 5 : '${product.price}'.length)}', style: TextStyle(fontSize: Get.width * 0.03, color: Colors.white, fontWeight: FontWeight.w800),),
+                  child: Text('\$ ${'${product.price}'}', style: TextStyle(fontSize: Get.width * 0.03, color: Colors.white, fontWeight: FontWeight.w800),),
                 ),
               )
             ],

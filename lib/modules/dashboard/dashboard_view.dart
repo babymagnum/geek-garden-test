@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geek_garden_test/data/values/enums.dart';
 import 'package:geek_garden_test/modules/dashboard/dashboard_controller.dart';
-import 'package:geek_garden_test/modules/dashboard/widgets/create_edit_product/create_edit_product_dialog.dart';
+import 'package:geek_garden_test/modules/dashboard/views/create_edit_product/create_edit_product_dialog.dart';
 import 'package:geek_garden_test/modules/dashboard/widgets/list_product_item.dart';
 import 'package:get/get.dart';
 

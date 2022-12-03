@@ -11,18 +11,24 @@ class CreateEditProductController extends GetxController {
     if (product == null) return;
 
     productId = product.id ?? 0;
-    productTitle(product.title ?? '');
-    productDescription(product.description ?? '');
+    productTitle = product.title ?? '';
+    productImage = product.image ?? '';
+    productPrice = product.price ?? 0.0;
+    productDescription = product.description ?? '';
   }
 
-  final productTitle = ''.obs;
-  final productDescription = ''.obs;
+  var productTitle = '';
+  var productDescription = '';
+  var productPrice = 0.0;
+  var productImage = '';
 
   final _dashboardController = Get.find<DashboardController>();
 
   Map<String, String? Function(dynamic)> get validators => {
-    'title': (v) => v.isEmpty ? 'Title kosong*' : null,
-    'description': (v) => v == null || v.isEmpty ? 'Deskripsi kosong*' : null,
+    'title': (v) => v.isEmpty ? "Title can't be empty*" : null,
+    'description': (v) => v == null || v.isEmpty ? "Description can't be empty*" : null,
+    'price': (v) => v == null || v.isEmpty ? "Price can't be empty*" : null,
+    'image': (v) => v == null || v.isEmpty ? "Image can't be empty*" : null,
   };
 
   bool get disable {
@@ -32,11 +38,12 @@ class CreateEditProductController extends GetxController {
   void createProduct() {
     _dashboardController.products.insert(0, ProductModel(
       id: _dashboardController.products.length + 1,
-      title: productTitle.value,
-      description: productDescription.value,
-      price: Random().nextDouble() * 120,
+      title: productTitle,
+      description: productDescription,
+      price: productPrice,
       category: 'Telor',
-      image: 'https://d3eeke16mv0lt7.cloudfront.net/sites/default/files/styles/article_hero_image/public/field/image/testing-trends-world-quality-report.jpg?itok=vUyONZsj',
+      image: productImage,
+      // image: 'https://d3eeke16mv0lt7.cloudfront.net/sites/default/files/styles/article_hero_image/public/field/image/testing-trends-world-quality-report.jpg?itok=vUyONZsj',
       rating: Rating(rate: Random().nextDouble() * 5)
     ));
 
@@ -46,8 +53,10 @@ class CreateEditProductController extends GetxController {
   void editProduct() {
     final selectedProduct = _dashboardController.products.indexWhere((element) => element.id == productId);
     final newItem = _dashboardController.products[selectedProduct];
-    newItem.title = productTitle.value;
-    newItem.description = productDescription.value;
+    newItem.title = productTitle;
+    newItem.description = productDescription;
+    newItem.image = productImage;
+    newItem.price = productPrice;
 
     _dashboardController.products[selectedProduct] = newItem;
     _dashboardController.products.refresh();

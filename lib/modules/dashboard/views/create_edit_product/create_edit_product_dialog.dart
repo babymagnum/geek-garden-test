@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geek_garden_test/data/model/response/product_model.dart';
-import 'package:geek_garden_test/modules/dashboard/widgets/create_edit_product/create_edit_product_controller.dart';
+import 'package:geek_garden_test/modules/dashboard/views/create_edit_product/create_edit_product_controller.dart';
 import 'package:geek_garden_test/widgets/custom_textbutton.dart';
 import 'package:geek_garden_test/widgets/custom_textfield.dart';
 import 'package:get/get.dart';
@@ -39,18 +39,18 @@ class CreateEditProductDialog extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Expanded(child: Text(product != null ? 'Edit Product' : 'Add Product', style: TextStyle(fontSize: Get.width * 0.04),)),
+                            Expanded(child: Text(product != null ? 'Edit Product' : 'Add Product', style: TextStyle(fontSize: Get.width * 0.04, fontWeight: FontWeight.bold),)),
                             const SizedBox(width: 10,),
                             GestureDetector(
                               onTap: () => Get.back(),
-                              child: Icon(Icons.close, size: Get.width * 0.04,),
+                              child: Icon(Icons.close, size: Get.width * 0.05,),
                             )
                           ],
                         ).marginSymmetric(horizontal: 16),
                         const SizedBox(height: 16,),
                         const Divider(height: 1, color: Color(0xffE5E5E5),),
                         const SizedBox(height: 16,),
-                        Text('Product Title', style: TextStyle(fontSize: Get.width * 0.04),).marginSymmetric(horizontal: 16),
+                        Text('Product Title', style: TextStyle(fontSize: Get.width * 0.04, fontWeight: FontWeight.w500),).marginSymmetric(horizontal: 16),
                         const SizedBox(height: 8,),
                         CustomTextField(
                           initialValue: product?.title,
@@ -59,12 +59,12 @@ class CreateEditProductDialog extends StatelessWidget {
                           maxLines: 1,
                           hint: 'Input product title',
                           validators: _controller.validators['title'],
-                          onChanged: (value) => _controller.productTitle(value.trim()),
+                          onChanged: (value) => _controller.productTitle = value.trim(),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: const BorderSide(color: Color(0xffE5E5E5))),
                           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Theme.of(context).primaryColor)),
                         ).marginSymmetric(horizontal: 16),
                         const SizedBox(height: 16,),
-                        Text('Product Description', style: TextStyle(fontSize: Get.width * 0.04),).marginSymmetric(horizontal: 16),
+                        Text('Product Description', style: TextStyle(fontSize: Get.width * 0.04, fontWeight: FontWeight.w500),).marginSymmetric(horizontal: 16),
                         const SizedBox(height: 8,),
                         CustomTextField(
                           initialValue: product?.description,
@@ -74,7 +74,36 @@ class CreateEditProductDialog extends StatelessWidget {
                           maxLines: 5,
                           textInputType: TextInputType.multiline,
                           validators: _controller.validators['description'],
-                          onChanged: (value) => _controller.productDescription(value.trim()),
+                          onChanged: (value) => _controller.productDescription = value.trim(),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: const BorderSide(color: Color(0xffE5E5E5))),
+                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Theme.of(context).primaryColor)),
+                        ).marginSymmetric(horizontal: 16),
+                        const SizedBox(height: 16,),
+                        Text('Product Image', style: TextStyle(fontSize: Get.width * 0.04, fontWeight: FontWeight.w500),).marginSymmetric(horizontal: 16),
+                        const SizedBox(height: 8,),
+                        CustomTextField(
+                          initialValue: product?.image,
+                          inputAction: TextInputAction.done,
+                          onEditingComplete: () => FocusScope.of(context).unfocus(),
+                          maxLines: 1,
+                          hint: 'Input product image',
+                          validators: _controller.validators['image'],
+                          onChanged: (value) => _controller.productImage = value.trim(),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: const BorderSide(color: Color(0xffE5E5E5))),
+                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Theme.of(context).primaryColor)),
+                        ).marginSymmetric(horizontal: 16),
+                        const SizedBox(height: 16,),
+                        Text('Product Price', style: TextStyle(fontSize: Get.width * 0.04, fontWeight: FontWeight.w500),).marginSymmetric(horizontal: 16),
+                        const SizedBox(height: 8,),
+                        CustomTextField(
+                          initialValue: '${product?.price ?? ''}',
+                          inputAction: TextInputAction.done,
+                          onEditingComplete: () => FocusScope.of(context).unfocus(),
+                          maxLines: 1,
+                          textInputType: TextInputType.number,
+                          hint: 'Input product price',
+                          validators: _controller.validators['price'],
+                          onChanged: (value) => _controller.productPrice = double.tryParse(value.trim()) ?? 0.0,
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: const BorderSide(color: Color(0xffE5E5E5))),
                           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: Theme.of(context).primaryColor)),
                         ).marginSymmetric(horizontal: 16),
